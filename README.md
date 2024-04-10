@@ -3,6 +3,7 @@ This project is highly dependent on guided-diffusion-model (https://github.com/o
 The RGB DM used in the paper is the 256x256_diffusion_uncond.pt (https://github.com/openai/guided-diffusion.git).
 
 some important files and directories:
+```
 config\                       # configuration for RGB DM and HSI DM
 guided-diffusion\
   gaussian_diffusion.py       # diffusion model for denoising and loss function
@@ -21,5 +22,5 @@ scripts\
   
 measurement.py                # gradient of log-posterior
 utils.py                      # some auxiliary functions
- 
+```
   
