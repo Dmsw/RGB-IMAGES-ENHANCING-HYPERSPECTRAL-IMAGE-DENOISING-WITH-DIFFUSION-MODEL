@@ -18,4 +18,4 @@ use_fp16: False
 use_new_attention_order: False
 
 # only for inference
-# model_path: ../models/hsi256/model040000.pt 
+model_path: /PATH/TO/HSI/DIFFUSION/MODEL
