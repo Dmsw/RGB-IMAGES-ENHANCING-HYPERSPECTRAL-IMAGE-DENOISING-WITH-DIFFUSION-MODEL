@@ -78,7 +78,6 @@ def main():
         upgrade_by_config(args, args.model_config)
     # th.manual_seed(0)
 
-    dist_util.setup_dist()
     logger.configure(dir=args.save_dir)
     logger.log(args)
 
@@ -88,7 +87,7 @@ def main():
     )
 
     model.load_state_dict(
-        dist_util.load_state_dict(args.model_path, map_location="cpu")
+        th.load(args.model_path, map_location="cpu")
     )
     model.to(dist_util.dev())
     if args.use_fp16:
@@ -103,7 +102,7 @@ def main():
         upgrade_by_config(args, args.rgb_model_config)
         rgb_model, rgb_diffusion = create_model_and_diffusion(**args_to_dict(args, model_and_diffusion_defaults().keys()))
         rgb_model.load_state_dict(
-            dist_util.load_state_dict(args.model_path, map_location="cpu")
+            th.load(args.model_path, map_location="cpu")
         )
         rgb_model.to(dist_util.dev())
         if args.use_fp16:
@@ -111,6 +110,7 @@ def main():
         rgb_model.eval()
     else:
         rgb_model = None
+        rgb_diffusion = None
 
     logger.log("loading data...")
     data = load_noise_hsi(
@@ -235,7 +235,6 @@ def main():
 
         count += 1
 
-    dist.barrier()
     logger.log("sampling complete")
     apsnr /= count
     assim /= count

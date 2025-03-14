@@ -714,6 +714,11 @@ class GaussianDiffusion:
                     )
                     rgb_sample = rgb_mean + nonzero_mask * th.exp(0.5 * log_variance) * noise
                     rgb_img = rgb_sample
+                else:
+                    out["distance"] = th.tensor(0)
+                    out["rgb_distance"] = th.tensor(0)
+                    out["rgb_out"] = th.tensor(0)
+                    out["hsi_out"] = out["pred_xstart"]
                 nonzero_mask = (
                     (t != 0).float().view(-1, *([1] * (len(img.shape) - 1)))
                 )    
