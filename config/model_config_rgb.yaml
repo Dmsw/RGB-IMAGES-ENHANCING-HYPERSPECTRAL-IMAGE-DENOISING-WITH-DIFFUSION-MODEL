@@ -19,4 +19,4 @@ use_fp16: True
 use_new_attention_order: False
 
 # path to the RGB diffusion model, for example the 256x256_diffusion_uncond.pt
-model_path: ../models/DM256/256x256_diffusion_uncond.pt
+model_path: /PATH/TO/RGB/DIFFUSION/MODEL
